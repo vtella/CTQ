@@ -4,9 +4,9 @@
 
 {
     "name" : "Allow/Disable POS Features in Odoo",
-    "version" : "13.0.1.0",
+    "version" : "13.0.1.2",
     "category" : "Point of Sale",
-    'summary': 'This apps helps to Allow and Disable POS Features like Payment, Qty, Discount, Edit Price, Remove Orderline',
+    'summary': 'Allow and Disable POS Features Disable Payment on pos disable Qty on pos disable Discount on pos disable price on pos Limitations pos Disable pos enabled features pos limitation on pos allow features pos user limitation hide pos feature hide point of sales',
     "description": """
 
     Purpose :-
@@ -88,7 +88,7 @@
 
     """,
     "author": "BrowseInfo",
-    "website" : "www.browseinfo.in",
+    "website" : "https://www.browseinfo.in",
     "price": 20,
     "currency": 'EUR',
     "depends" : ['base','sale','point_of_sale','pos_hr'],

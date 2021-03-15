@@ -42,6 +42,62 @@ odoo.define('pos_disable_payments.pos_disable_payments', function(require) {
 		},
 	});
 
+    screens.NumpadWidget.include({
+	    clickAppendNewChar: function(event) {
+            var cashier = this.pos.get_cashier();
+            if(this.state.get('mode') == 'quantity'){
+                 if('is_allow_qty' in cashier){
+                     if (cashier.is_allow_qty) {
+				        var newChar;
+				        newChar = event.currentTarget.innerText || event.currentTarget.textContent;
+				        return this.state.appendNewChar(newChar);
+                     }
+                     else{
+                         alert("Sorry,You have no access to change quantity");
+                     }
+                 }
+                 else{
+			        var newChar;
+			        newChar = event.currentTarget.innerText || event.currentTarget.textContent;
+			        return this.state.appendNewChar(newChar);
+                 }  
+            }else if(this.state.get('mode') == 'price'){
+                 if('is_edit_price' in cashier){
+                     if (cashier.is_edit_price) {
+                        var newChar;
+				        newChar = event.currentTarget.innerText || event.currentTarget.textContent;
+				        return this.state.appendNewChar(newChar);
+                     }
+                     else{
+                         alert("Sorry,You have no access to change Price");
+                     }
+                 }
+                 else{
+			        var newChar;
+			        newChar = event.currentTarget.innerText || event.currentTarget.textContent;
+			        return this.state.appendNewChar(newChar);
+                 } 
+            }else if(this.state.get('mode') == 'discount'){
+                 if('is_allow_discount' in cashier){
+                     if (cashier.is_allow_discount) {
+				        var newChar;
+				        newChar = event.currentTarget.innerText || event.currentTarget.textContent;
+				        return this.state.appendNewChar(newChar);
+                     }
+                     else{
+                         alert("Sorry,You have no access to change discount");
+                     }
+                 }
+                 else{
+                 	var newChar;
+                 	newChar = event.currentTarget.innerText || event.currentTarget.textContent;
+                 	return this.state.appendNewChar(newChar);
+                 } 
+            }
+	    },
+    });
+
+
 	screens.ProductScreenWidget.include({
 
 		show: function() {
@@ -58,8 +114,8 @@ odoo.define('pos_disable_payments.pos_disable_payments', function(require) {
 				this.pos.users.some(function(user) {
 					if (user.id === cashier.user_id[0]) {
 						cashier.is_allow_payments = user.is_allow_payments;
-						cashier.is_allow_discount = user.is_allow_qty;
-						cashier.is_allow_qty = user.is_allow_discount;
+						cashier.is_allow_qty = user.is_allow_qty;
+						cashier.is_allow_discount = user.is_allow_discount;
 						cashier.is_edit_price = user.is_edit_price;
 						cashier.is_allow_remove_orderline = user.is_allow_remove_orderline;
 						return true;
@@ -74,24 +130,28 @@ odoo.define('pos_disable_payments.pos_disable_payments', function(require) {
 			else{
 				$('.button.pay').hide();
 			}
+
 			if (cashier.is_allow_qty == true) {
 				$('.mode-button.qty.selected-mode').show();
 			}
 			else{
 				$('.mode-button.qty.selected-mode').hide();
 			}
+
 			if (cashier.is_allow_discount == true) {
 				$('.mode-button.disc').show();
 			}
 			else{
 				$('.mode-button.disc').hide();
 			}
+
 			if (cashier.is_edit_price == true) {
 				$('.mode-button.price').show();
 			}
 			else{
 				$('.mode-button.price').hide();
 			}
+
 			if (cashier.is_allow_remove_orderline == true) {
 				$('.input-button.numpad-backspace').show();
 			}
